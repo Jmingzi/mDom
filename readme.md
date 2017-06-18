@@ -26,7 +26,7 @@ api列表
 
 #### API：查找dom
 
-##### select
+### select
 
 ```html
 <div class="div" data-id="div"></div>
