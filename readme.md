@@ -12,17 +12,17 @@ import Mdom from './mDom.js'
 ```
 
 api列表
-+ [select](#/select)
-+ [next](#/next)
-+ [prev](#/prev)
-+ [filterBy](#/filterBy)
++ [select](#select)
++ [next](#next)
++ [prev](#prev)
++ [filterBy](#filterBy)
 
-+ [el](#/el)
-+ [css](#/css)
-+ [attr](#/attr)
-+ [mount](#/mount)
-+ [html](#/html)
-+ [text](#/text)
++ [el](#el)
++ [css](#css)
++ [attr](#attr)
++ [mount](#mount)
++ [html](#html)
++ [text](#text)
 
 #### API：查找dom
 
@@ -30,6 +30,7 @@ api列表
 
 ```html
 <div class="div" data-id="div"></div>
+<p>hello world!</p>
 ```
 
 @params selector
@@ -50,9 +51,26 @@ mDom.select('div', {
 })
 ```
 
-查找dom|name|description
-----|----|----
-||select|查找，返回`null`或`dom`或`[dom1, dom2, ..., domN]`
-||next|
+@return
+```js
+`null`或`dom`或`[dom1, dom2, ..., domN]`
+```
+
+### next
+```js
+mDom.next(mDom.select('.div'))
+// p
+```
+
+### prev 同理
+
+### filterBy 精确查找
+```js
+mDom.filterBy(mDom.select('.div'), {
+  'data-id': 'div'
+})
+```
+@params dom 被选择的节点
+@params option 操作条件，一般为attributes
 
 
