@@ -14,15 +14,15 @@ import Mdom from './mDom.js'
 api列表
 + [select](#select)
 + [next](#next)
-+ [prev](#prev)
-+ [filterBy](#filterBy)
++ [prev](#prev-同上)
++ [filterBy](#filterBy-精确查找)
 
 + [el](#el)
 + [css](#css)
 + [attr](#attr)
-+ [mount](#mount)
++ [mount](#mount-将创建的dom添加到目标对象中)
 + [html](#html)
-+ [text](#text)
++ [text](#text-同上)
 
 ----
 #### API：查找dom
