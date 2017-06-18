@@ -11,11 +11,22 @@ import Mdom from './mDom.js'
 </script>  
 ```
 
-#### API
+api列表
++ [select](#/select)
++ [next](#/next)
++ [prev](#/prev)
++ [filterBy](#/filterBy)
 
-#### 查找dom
++ [el](#/el)
++ [css](#/css)
++ [attr](#/attr)
++ [mount](#/mount)
++ [html](#/html)
++ [text](#/text)
 
-+ select
+#### API：查找dom
+
+##### select
 
 ```html
 <div class="div" data-id="div"></div>
