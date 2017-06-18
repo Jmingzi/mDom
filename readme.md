@@ -26,16 +26,15 @@ api列表
 
 #### API：查找dom
 
-### select
-
+示例dom
 ```html
 <div class="div" data-id="div"></div>
 <p>hello world!</p>
 ```
 
-@params selector
+### select
 
-选择器，可接受`class`或`id`或`tagName`，'.class'，'#id'，'tagName'，默认'tagName'。
+@params selector 选择器，可接受`class`或`id`或`tagName`(`.class`，`#id`，`tagName`)默认`tagName`。
 
 ```js
 mDom.select('.div')
@@ -43,7 +42,7 @@ mDom.select('#div')
 mDom.select('div')
 ```
 
-@params option
+@params option 筛选条件，一般为attributes
 ```js
 mDom.select('div', {
   class: 'div',
