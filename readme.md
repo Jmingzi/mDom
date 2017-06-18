@@ -13,9 +13,35 @@ import Mdom from './mDom.js'
 
 #### API
 
+#### 查找dom
+
++ select
+
+```html
+<div class="div" data-id="div"></div>
+```
+
+@params selector
+
+选择器，可接受`class`或`id`或`tagName`，'.class'，'#id'，'tagName'，默认'tagName'。
+
+```js
+mDom.select('.div')
+mDom.select('#div')
+mDom.select('div')
+```
+
+@params option
+```js
+mDom.select('div', {
+  class: 'div',
+  'data-id': 'div'
+})
+```
+
 查找dom|name|description
 ----|----|----
-|select|查找
-
+||select|查找，返回`null`或`dom`或`[dom1, dom2, ..., domN]`
+||next|
 
 
