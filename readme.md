@@ -24,6 +24,7 @@ api列表
 + [html](#html)
 + [text](#text)
 
+----
 #### API：查找dom
 
 示例dom
@@ -74,6 +75,8 @@ mDom.filterBy(mDom.select('.div'), {
 ```
 @params dom 被选择的节点
 @params option 操作条件，一般为attributes
+
+-----
 
 #### API：创建dom
 
