@@ -73,17 +73,22 @@ mDom.filterBy(mDom.select('.div'), {
   'data-id': 'div'
 })
 ```
-@params dom 被选择的节点
-@params option 操作条件，一般为attributes
+@params dom 被选择的节点  
+
+@params option 操作条件，一般为attributes  
+
 
 -----
 
 #### API：创建dom
 
 ### el 
-创建dom对象
-@params tagName 创建标签名称，为空的时候创建文本节点
-@params attributes dom属性
+创建dom对象  
+
+@params tagName 创建标签名称，为空的时候创建文本节点  
+
+@params attributes dom属性  
+
 @return 返回一个函数，接受一个参数childs，为该节点的子节点
 
 ```js
@@ -106,7 +111,8 @@ mDom.css(box)({color: 'red', 'font-size': '16px'})
 ```
 
 ### html 
-@params dom 目标dom
+@params dom 目标dom  
+
 @params html 为空时，表示获取该dom的html；否则设置innerHTML到该对象上
 
 ```js
@@ -120,8 +126,10 @@ mDom.html(box, '<p>hello world</p>')
 
 ### mount 将创建的dom添加到目标对象中
 
-@params target 目标对象
-@params dom 创建的dom
+@params target 目标对象  
+
+@params dom 创建的dom  
+
 @return 返回一个函数，接受：
 
 + @params method 插入方式，默认为`append`，可选`prepend`
