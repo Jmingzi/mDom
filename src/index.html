@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id='div' data-id='1'>111111</div>
+
+    <div class="box">
+        <div class="box1"></div>222<div class="box2">
+            <div class="box3"></div>
+        </div>
+
+        <div class="box4"></div>
+    </div>
+
+    <script src="./mDom.js"></script>
+
+    <script>
+        // debugger
+        // console.log(mSelect.select('div', {
+        //     class: 'test1'
+        // }))
+
+        var box = mDom.select('#div')
+
+        // box1.firstChild = document.createElement('a')
+
+        // console.log([].concat(box1))
+
+        var box1 = mDom.select('.box1')
+        var box4 = mDom.select('.box4')
+    
+
+        // console.log(mDom.prev(box4))
+        // console.log(mDom.prev(mDom.prev(box4)))
+
+        var h1 = mDom.el('h1', {
+            class: 'h1hh1h1',
+            style: {
+                color:'red',
+                'font-size': '14px'
+            }
+        })(mDom.el('ppppp')())
+
+        // console.log(h1)
+
+        // mDom.text(h1, 'hehehe')
+
+        mDom.mount(document.body, h1)('prepend', ()=> console.log('before'))
+
+        mDom.css(box)({color: 'red', 'font-size': '16px'})
+    </script>
+</body>
+</html>
