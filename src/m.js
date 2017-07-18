@@ -4,7 +4,7 @@
         constructor () {
             this.elem = null
             this.jsName = 'm.js'
-            this.element = 'mElem'
+            this.elementName = 'mElem'
             this.length = 0
         }
 
@@ -176,18 +176,28 @@
             return this
         }
 
-        text () {
-
+        text (text) {
+            if (text) {
+                Array.from(this.elem).forEach(elem => elem.innerText = text)
+            } else {
+                return this.elem[0].innerText
+            }
         }
 
-        html () {
-
+        html (html) {
+            if (html) {
+                Array.from(this.elem).forEach(elem => elem.innerHTMl = html)
+            } else {
+                return this.elem[0].innerHTMl
+            }
         }
 
         append (mElem) {
-            Array.from(this.elem).forEach(elem => {
-                Array.from(mElem.elem).forEach(child => elem.appendChild(child))
-            })
+            if (this.isMelem(mElem)) {
+                Array.from(this.elem).forEach(elem => {
+                    Array.from(mElem.elem).forEach(child => elem.appendChild(child))
+                })
+            }
         }
 
         appendTo (mElem) {
@@ -231,6 +241,10 @@
 
         isElement (elem) {
             return elem.nodeType === 1
+        }
+
+        isMelem (mElem) {
+            return mElem && mElem.jsName && mElem.elementName && mElem.elem !== undefined
         }
 
         isDocumentElem () {
