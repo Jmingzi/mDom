@@ -20,6 +20,8 @@
     <script src="./mDom.js"></script>
 
     <script>
+         console.log(mDom)
+
         // debugger
         // console.log(mSelect.select('div', {
         //     class: 'test1'
@@ -42,7 +44,7 @@
             class: 'h1hh1h1',
             style: {
                 color:'red',
-                'font-size': '14px'
+                'font-size': '12px'
             }
         })(mDom.el('ppppp')())
 
@@ -50,9 +52,9 @@
 
         // mDom.text(h1, 'hehehe')
 
-        mDom.mount(document.body, h1)('prepend', ()=> console.log('before'))
+        mDom.mount(document.body, h1)('prepend', () => console.log('before'))
 
-        mDom.css(box)({color: 'red', 'font-size': '16px'})
+        mDom.css(box)({color: 'blue', 'font-size': '16px'})
     </script>
 </body>
 </html>

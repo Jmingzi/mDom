@@ -18,7 +18,7 @@
     
     // 查找缓存
     var selectCache = {
-        getCacheKey: function(selector, option) {
+        getCacheKey: function (selector, option) {
             var keyString = ''
 
             if (option) {
@@ -37,7 +37,7 @@
             var cache, cacheKey
 
             this.selector = selector
-            this.option = option
+            // this.option = option
 
             cacheKey = selectCache.getCacheKey(selector, option)
             cache = selectCache[cacheKey]
@@ -45,9 +45,13 @@
             if (cache) {
                 return cache
             } else {
-                cache = this.filterByOption(this.getSelectMethod()(), option)
-                selectCache[cacheKey] = cache
+                if (option) {
+                    cache = this.filterByOption(this.getSelectMethod()(), option)
+                } else {
+                    cache = this.getSelectMethod()()
+                }
 
+                selectCache[cacheKey] = cache
                 return cache
             }
         },
@@ -89,6 +93,10 @@
         selectByTag: function() {
             return this.forMatReturn(document.getElementsByTagName(this.selector))
         },
+
+        querySelect: function () {
+            return this.forMatReturn(document.querySelectorAll(this.selector))
+        },
         
         /**
          * 将orignal Dom节点根据给定的option过滤
@@ -104,7 +112,7 @@
             var filterResult = []
             var _compareAttr = function(obj1, obj2) {
                 for (var i = 0; i < obj1.length; i++) {
-                    for (obj2Key in obj2) {
+                    for (var obj2Key in obj2) {
                         if (obj1[i].name === obj2Key && (new RegExp(obj2[obj2Key]).test(obj1[i].value))) {
                             return true
                         }
@@ -125,12 +133,18 @@
         },
 
         getSelectMethod: function() {
-            if (this.isTag()) {
-                return this.selectByTag.bind(this)
-            } else if (this.isClass()) {
-                return this.selectByClass.bind(this)
+            if (document.querySelectorAll) {
+                return this.querySelect.bind(this)
             } else {
-                return this.selectById.bind(this)
+                if (this.isTag()) {
+                    return this.selectByTag.bind(this)
+                } else if (this.isClass()) {
+                    return this.selectByClass.bind(this)
+                } else if (this.isId()) {
+                    return this.selectById.bind(this)
+                } else {
+                    console.error('selector is illegal')
+                }
             }
         },
 
@@ -147,7 +161,7 @@
         },
 
         forMatReturn: function(value) {
-            if ((value instanceof HTMLCollection || value instanceof Array) && value.length <= 1) {
+            if (value instanceof Object && value.length <= 1) {
                 return value.length === 1 ? value[0] : null
             } else {
                 return value
@@ -181,9 +195,19 @@
 
         css: function(dom) {
             return function(style) {
+                var styleName, styleString = ''
+
                 if (typeof style === 'object') {
-                    for (var styleName in style) {
-                        dom.style[styleName] = style[styleName]
+                    if (dom.style) {
+                        for (styleName in style) {
+                            dom.style[styleName] = style[styleName]
+                        }
+                    } else {
+                        for (styleName in style) {
+                            styleString += styleName + ':' + style[styleName] + ';'
+                        }
+                        console.log(styleString)
+                        dom.cssText = styleString
                     }
                 }
             }
@@ -282,19 +306,19 @@
     }
 
     // 导出对象
-    var mdom = {
-        version: '0.0.1',
-        select: select.select.bind(select),
-        prev: select.prev.bind(select),
-        next: select.next.bind(select),
-        filterBy: select.filterByOption.bind(select),
+    var mdom = {},
+        method
 
-        el: create.el.bind(create),
-        css: create.css.bind(create),
-        attr: create.attr.bind(create),
-        mount: create.mount.bind(create),
-        html: create.html.bind(create),
-        text: create.text.bind(create)
+    for (method in select) {
+        if (typeof select[method] === 'function') {
+            mdom[method] = select[method].bind(select)
+        }
+    }
+
+    for (method in create) {
+        if (typeof create[method] === 'function') {
+            mdom[method] = create[method].bind(create)
+        }
     }
 
     if (typeof module === 'object' && typeof module.export === 'object') {
