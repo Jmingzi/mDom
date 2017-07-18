@@ -1,28 +1,11 @@
 (function(win) {
-    /**
-     * mDom
-     * 功能:
-     * 
-     * select
-     * next
-     * prev
-     * filterBy
-     * 
-     * el   各种标签node 文本node  嵌套创建children
-     * css
-     * attr
-     * mount
-     * html
-     * text
-     */
-    
     // 查找缓存
-    var selectCache = {
+    const selectCache = {
         getCacheKey: function (selector, option) {
-            var keyString = ''
+            let keyString = '', key
 
             if (option) {
-                for (var key in option) {
+                for (key in option) {
                     keyString += key + option[key]
                 }
             }
@@ -303,6 +286,20 @@
                 return dom.innerHTML
             }
         }
+    }
+
+    /**
+     * 去掉选择器选项
+     *
+     * @param {String} selector
+     * @returns {String}
+     */
+    function getStringBySelector (selector) {
+        if (/^[\.|#]/.test(selector)) {
+            selector = selector.substring(1)
+        }
+
+        return selector
     }
 
     // 导出对象

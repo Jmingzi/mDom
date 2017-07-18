@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
+<body id="body1">
     <div id='div' data-id='1'>111111</div>
 
     <div class="box">
-        <div class="box1"></div>222<div class="box2">
+        <div class="box1"></div>222
+        <div class="box2">
             <div class="box3"></div>
         </div>
 
@@ -18,9 +19,10 @@
     </div>
 
     <script src="./mDom.js"></script>
+    <script src="./m.js"></script>
 
     <script>
-         console.log(mDom)
+//         console.log(mDom)
 
         // debugger
         // console.log(mSelect.select('div', {
@@ -55,6 +57,18 @@
         mDom.mount(document.body, h1)('prepend', () => console.log('before'))
 
         mDom.css(box)({color: 'blue', 'font-size': '16px'})
+
+        console.log(m('div'))
+
+        m('div').find({ class: 'box3' }).parent('.box').siblings('#div').log()
+
+        console.log(m('div').find({ class: 'box3' }).isChild('.box'))
+
+        el('a', {
+            href: 'https://www.baidu.com',
+            style: 'color:red;font-size:20px;',
+            innerText: 'https://www.baidu.com'
+        }).css('color:blue;').appendTo(m('body'))
     </script>
 </body>
 </html>
