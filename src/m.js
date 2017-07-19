@@ -193,23 +193,26 @@
         }
 
         append (mElem) {
-            if (this.isMelem(mElem)) {
-                Array.from(this.elem).forEach(elem => {
-                    Array.from(mElem.elem).forEach(child => elem.appendChild(child))
-                })
+            if (this.isMelement(mElem)) {
+                Array.from(mElem.elem).forEach(child => this.elem[0].appendChild(child))
+            } else {
+                console.log('mElem is not a mElem')
             }
         }
 
-        appendTo (mElem) {
-            Array.from(mElem.elem).forEach(elem => elem.appendChild(this.elem[0]))
-        }
+        prepend (mElem) {
+            if (this.isMelement(mElem)) {
+                let target = this.elem[0],
+                parent = target.parentNode
 
-        prepend () {
-
-        }
-
-        prependTo () {
-
+                if (target.firstChild) {
+                    Array.from(mElem.elem).forEach(elem => parent.insertBefore(elem, target.firstChild))
+                } else {
+                    this.append(mElem)
+                }
+            } else {
+                console.log('mElem is not a mElem')
+            }
         }
 
         filterByAttr (prevObj, obj) {
@@ -243,7 +246,7 @@
             return elem.nodeType === 1
         }
 
-        isMelem (mElem) {
+        isMelement (mElem) {
             return mElem && mElem.jsName && mElem.elementName && mElem.elem !== undefined
         }
 
@@ -315,7 +318,17 @@
             console.error('tagName must be a string')
             return
         }
+        
+        if (props && typeof props !== 'object') {
+            console.error('props must be an Object')
+            return 
+        }
 
+        if (childs && typeof childs !== 'object') {
+            console.error('childs must be an Object')
+            return
+        }
+        
         return new El(tagName, props, childs)
     }
 
